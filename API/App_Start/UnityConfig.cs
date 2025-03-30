@@ -1,4 +1,6 @@
+using API.Common;
 using Unity;
+using Unity.Lifetime;
 
 namespace API
 {
@@ -10,7 +12,7 @@ namespace API
         {
 			Container = new UnityContainer();
             
-            // e.g. container.RegisterType<ITestService, TestService>();
+            Container.RegisterType<Cache>(new HierarchicalLifetimeManager());
         }
     }
 }

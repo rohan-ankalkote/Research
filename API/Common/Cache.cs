@@ -1,0 +1,8 @@
+﻿namespace API.Common
+{
+    public class Cache
+    {
+        public static string SecretKey = "bfa7e847bad2ee7e400fa56c2e85c81eac7be1781dfc502579083a434d404099f7652e053518055b57ac35eceebf0d93070f75650a22383db7d365b4a9f643c789f173c7299c1d322ebae22d73269ce44abe8ee500d47a4f0db8bbd8cfc2096c77364ed342bdb9311b3e34a001b92a80bc373ab1bcffb48e0635bcc50cdb5e19a9343f2d020a2c567a6118b5b0f3fe693ed3c46f050bf708d92e9d9eff7a092260752321d32e919adb8a5c0b7fb41bc07f7aa8327384df1a4d77894e68a11ebb9ac6dab6c5c6bffb8a9b30c08e47aa6976cb3c82a5fed40b546c32aadb008ec0721a0cfa90dd62ef5c489e4e41caf2c2c85b4ee1d8e09ac12c25ececbe07828f";
+        public string UserName { get; set; }
+    }
+}
