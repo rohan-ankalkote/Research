@@ -1,7 +1,9 @@
-﻿using System.Web.Http;
+﻿using API.Common.Middlewares;
 using Microsoft.Owin;
 using Owin;
 using Swashbuckle.Application;
+using System.Text.RegularExpressions;
+using System.Web.Http;
 using Unity.WebApi;
 
 [assembly: OwinStartup(typeof(API.Startup))]
@@ -24,6 +26,12 @@ namespace API
             }).EnableSwaggerUi();
 
             config.MapHttpAttributeRoutes();
+
+            app.MapWhen(context => Regex.IsMatch(context.Request.Uri.AbsolutePath.ToLower(), "/api"), appBuilder =>
+            {
+                appBuilder.Use<UnhandledExceptionMiddleware>();
+                appBuilder.UseWebApi(config);
+            });
 
             app.UseWebApi(config);
         }

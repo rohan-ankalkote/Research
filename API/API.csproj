@@ -191,6 +191,8 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="Common\Exceptions\UnauthorizedException.cs" />
+    <Compile Include="Common\Middlewares\UnhandledExceptionMiddleware.cs" />
     <Compile Include="Controllers\HealthCheckController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
