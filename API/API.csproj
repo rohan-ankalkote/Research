@@ -234,6 +234,7 @@
     <Compile Include="Common\Filters\RootFilter.cs" />
     <Compile Include="Common\Middlewares\AuthenticationMiddleware.cs" />
     <Compile Include="Common\Middlewares\IScopedMiddleware.cs" />
+    <Compile Include="Common\Middlewares\LicensingMiddleware.cs" />
     <Compile Include="Common\Middlewares\UnhandledExceptionMiddleware.cs" />
     <Compile Include="Common\Middlewares\UnityDependencyScopeMiddleware.cs" />
     <Compile Include="Controllers\HealthCheckController.cs" />

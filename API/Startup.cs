@@ -81,9 +81,11 @@ namespace API
                 appBuilder.Use<UnityDependencyScopeMiddleware>();
                 appBuilder.UseScoped<UnhandledExceptionMiddleware>();
                 appBuilder.UseScoped<AuthenticationMiddleware>();
+                appBuilder.UseScoped<LicensingMiddleware>();
                 appBuilder.UseWebApi(config);
             });
 
+            app.Use<UnityDependencyScopeMiddleware>();
             app.UseWebApi(config);
         }
     }
