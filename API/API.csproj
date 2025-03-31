@@ -226,9 +226,16 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Common\Cache.cs" />
+    <Compile Include="Common\ControllerActivator.cs" />
     <Compile Include="Common\Exceptions\UnauthorizedException.cs" />
+    <Compile Include="Common\ExtensionMethods.cs" />
+    <Compile Include="Common\Filters\FilterBuilder.cs" />
+    <Compile Include="Common\Filters\IScopedFilter.cs" />
+    <Compile Include="Common\Filters\RootFilter.cs" />
     <Compile Include="Common\Middlewares\AuthenticationMiddleware.cs" />
+    <Compile Include="Common\Middlewares\IScopedMiddleware.cs" />
     <Compile Include="Common\Middlewares\UnhandledExceptionMiddleware.cs" />
+    <Compile Include="Common\Middlewares\UnityDependencyScopeMiddleware.cs" />
     <Compile Include="Controllers\HealthCheckController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,14 +1,15 @@
-﻿using System.Text;
+﻿using API.Common;
 using API.Common.Middlewares;
-using Microsoft.Owin;
-using Owin;
-using Swashbuckle.Application;
-using System.Text.RegularExpressions;
-using System.Web.Http;
-using API.Common;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Jwt;
+using Owin;
+using Swashbuckle.Application;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Web.Http;
+using System.Web.Http.Dispatcher;
 using Unity.WebApi;
 
 [assembly: OwinStartup(typeof(API.Startup))]
@@ -24,6 +25,8 @@ namespace API
             UnityConfig.RegisterComponents();
 
             config.DependencyResolver = new UnityDependencyResolver(UnityConfig.Container);
+
+            config.Services.Replace(typeof(IHttpControllerActivator), new ControllerActivator());
 
             config.EnableSwagger(s =>
             {
@@ -75,8 +78,9 @@ namespace API
 
             app.MapWhen(context => Regex.IsMatch(context.Request.Uri.AbsolutePath.ToLower(), "/api"), appBuilder =>
             {
-                appBuilder.Use<UnhandledExceptionMiddleware>();
-                appBuilder.Use<AuthenticationMiddleware>();
+                appBuilder.Use<UnityDependencyScopeMiddleware>();
+                appBuilder.UseScoped<UnhandledExceptionMiddleware>();
+                appBuilder.UseScoped<AuthenticationMiddleware>();
                 appBuilder.UseWebApi(config);
             });
 

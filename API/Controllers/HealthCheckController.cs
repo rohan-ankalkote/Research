@@ -16,7 +16,7 @@ namespace API.Controllers
         [Route("api/health")]
         public IHttpActionResult Get()
         {
-            return Ok("Working");
+            return Ok($"Hello, {Cache.UserName}");
         }
     }
 }

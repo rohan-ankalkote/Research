@@ -13,14 +13,12 @@ namespace API.Common.Middlewares
     /// <summary>
     /// Middleware to catch all unhandled exceptions and generate required response.
     /// </summary>
-    public class UnhandledExceptionMiddleware : OwinMiddleware
+    public class UnhandledExceptionMiddleware : IScopedMiddleware
     {
         private Stream _originalStream;
         private IOwinContext _context;
 
-        public UnhandledExceptionMiddleware(OwinMiddleware next) : base(next) { }
-
-        public override async Task Invoke(IOwinContext context)
+        public async Task InvokeAsync(IOwinContext context, Func<Task> next)
         {
             try
             {
@@ -32,7 +30,7 @@ namespace API.Common.Middlewares
                 // Set new memory stream to body where response will be stored.
                 context.Response.Body = new MemoryStream();
 
-                await Next.Invoke(context);
+                await next();
 
                 // Pointer will be pointing to end so make it point to start.
                 context.Response.Body.Seek(0, SeekOrigin.Begin);
