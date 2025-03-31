@@ -7,5 +7,6 @@ namespace API.Common.Attributes
     {
         public string ComponentCode { get; set; }
         public string ActionCode { get; set; }
+        public bool OpenResource { get; set; }
     }
 }

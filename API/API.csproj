@@ -227,6 +227,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Common\Attributes\EntitlementAttribute.cs" />
+    <Compile Include="Common\BaseClassAndDerivedClassRouteProvider.cs" />
     <Compile Include="Common\Cache.cs" />
     <Compile Include="Common\ControllerActivator.cs" />
     <Compile Include="Common\Exceptions\UnauthorizedException.cs" />
@@ -248,13 +249,17 @@
     <Compile Include="Common\Middlewares\UnhandledExceptionMiddleware.cs" />
     <Compile Include="Common\Middlewares\UnityDependencyScopeMiddleware.cs" />
     <Compile Include="Common\Models\LogModel.cs" />
+    <Compile Include="Common\Models\ModelBase.cs" />
     <Compile Include="Common\Models\UserModel.cs" />
     <Compile Include="Common\Repository.cs" />
     <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\HealthCheckController.cs" />
+    <Compile Include="Controllers\MaintenanceController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IMaintenanceRepository.cs" />
+    <Compile Include="Repositories\MaintenanceRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

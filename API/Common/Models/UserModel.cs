@@ -1,8 +1,7 @@
 ﻿namespace API.Common.Models
 {
-    public class UserModel
+    public class UserModel : ModelBase
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

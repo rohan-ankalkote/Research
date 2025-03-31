@@ -1,18 +1,21 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Web.Http;
-using API.Common;
-using API.Common.Attributes;
+﻿using API.Common.Attributes;
 using API.Common.MediaTypeFormatters;
 using API.Common.Models;
+using API.Repositories;
+using System;
+using System.IO;
+using System.Web.Http;
 
 namespace API.Controllers
 {
     [RoutePrefix("api/user")]
     [Entitlement(ComponentCode = "USER")]
-    public class UserController : ApiController
+    public class UserController : MaintenanceController<UserModel>
     {
+        public UserController(IMaintenanceRepository<UserModel> repository) : base(repository)
+        {
+        }
+
         [HttpPost]
         [Route("upload")]
         [Entitlement(ActionCode = "UPLOAD")]
@@ -27,71 +30,6 @@ namespace API.Controllers
             }
 
             return Ok("Uploaded");
-        }
-
-        [HttpGet]
-        [Entitlement(ActionCode = "SEARCH")]
-        [Route("{key:int}")]
-        public IHttpActionResult Get(int key)
-        {
-            var model = Repository.Users.FirstOrDefault(c => c.Id == key);
-
-            if (model == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(model);
-        }
-
-        [HttpPost]
-        [Entitlement(ActionCode = "INSERT")]
-        [Route("")]
-        public IHttpActionResult Insert(UserModel model)
-        {
-            var id = Repository.Users.Count == 0 ? 1 : Repository.Users.Select(c => c.Id).Max() + 1;
-            var insertedModel = new UserModel()
-            {
-                Id = id,
-                Name = model.Name
-            };
-            Repository.Users.Add(insertedModel);
-
-            return Ok(insertedModel);
-        }
-
-        [HttpPut]
-        [Entitlement(ActionCode = "UPDATE")]
-        [Route("")]
-        public IHttpActionResult Update(UserModel model)
-        {
-            var existingModel = Repository.Users.FirstOrDefault(c => c.Id == model.Id);
-
-            if (existingModel == null)
-            {
-                return BadRequest("Model not found");
-            }
-
-            existingModel.Name = model.Name;
-
-            return Ok(existingModel);
-        }
-
-        [HttpDelete]
-        [Entitlement(ActionCode = "DELETE")]
-        [Route("")]
-        public IHttpActionResult Delete(int key)
-        {
-            var existingModel = Repository.Users.FirstOrDefault(c => c.Id == key);
-
-            if (existingModel == null)
-            {
-                return BadRequest("Model not found");
-            }
-
-            Repository.Users.Remove(existingModel);
-
-            return Ok(existingModel);
         }
     }
 }

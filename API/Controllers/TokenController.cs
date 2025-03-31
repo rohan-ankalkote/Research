@@ -5,14 +5,17 @@ using System.Security.Claims;
 using System.Text;
 using System.Web.Http;
 using API.Common;
+using API.Common.Attributes;
 using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers
 {
+    [RoutePrefix("auth/token")]
     public class TokenController : ApiController
     {
         [HttpGet]
-        [Route("auth/token/{userName}")]
+        [Route("{userName}")]
+        [Entitlement(OpenResource = true)]
         public IHttpActionResult GetToken(string userName)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Cache.SecretKey));

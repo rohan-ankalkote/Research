@@ -14,7 +14,7 @@ namespace API.Common.Filters
 
         public async Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext, CancellationToken cancellationToken)
         {
-            Logger.WriteError(actionExecutedContext.Exception);
+            //Logger.WriteError(actionExecutedContext.Exception);
 
             var response = actionExecutedContext.Request.CreateErrorResponse(
                 HttpStatusCode.InternalServerError,

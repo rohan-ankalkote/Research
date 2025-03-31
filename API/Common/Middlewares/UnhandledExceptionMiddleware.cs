@@ -46,13 +46,13 @@ namespace API.Common.Middlewares
             {
                 await CreateErrorResponse(ex.Message, HttpStatusCode.Unauthorized);
 
-                Logger.WriteError(ex);
+                //Logger.WriteError(ex);
             }
             catch (Exception ex)
             {
                 await CreateErrorResponse(ex.Message, HttpStatusCode.InternalServerError);
 
-                Logger.WriteError(ex);
+                //Logger.WriteError(ex);
             }
         }
 

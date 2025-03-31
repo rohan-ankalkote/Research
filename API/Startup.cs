@@ -1,4 +1,6 @@
 ﻿using API.Common;
+using API.Common.Filters;
+using API.Common.MediaTypeFormatters;
 using API.Common.Middlewares;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Owin;
@@ -10,8 +12,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
-using API.Common.Filters;
-using API.Common.MediaTypeFormatters;
 using Unity.WebApi;
 
 [assembly: OwinStartup(typeof(API.Startup))]
@@ -49,8 +49,7 @@ namespace API
             // This works only if Content-Type is multipart/form-data
             config.Formatters.Add(new MultipartFormDataMediaTypeFormatter());
 
-
-            config.MapHttpAttributeRoutes();
+            config.MapHttpAttributeRoutes(new BaseClassAndDerivedClassRouteProvider());
 
             app.UseJwtBearerAuthentication(new JwtBearerAuthenticationOptions()
             {

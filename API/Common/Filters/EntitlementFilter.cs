@@ -19,7 +19,9 @@ namespace API.Common.Filters
             var attributeOnMethod =
                 context.ActionDescriptor.GetCustomAttributes<EntitlementAttribute>().FirstOrDefault();
 
-            if(attributeOnController == null  | attributeOnMethod == null)
+            if (attributeOnMethod != null && attributeOnMethod.OpenResource) return;
+
+            if (attributeOnController == null || attributeOnMethod == null)
             {
                 throw new UnauthorizedException("User doesn't have entitlements.");
             }
