@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using API.Common.Logging;
 
 namespace API.Common.Middlewares
 {
@@ -45,13 +46,13 @@ namespace API.Common.Middlewares
             {
                 await CreateErrorResponse(ex.Message, HttpStatusCode.Unauthorized);
 
-                //Logger.WriteError(ex);
+                Logger.WriteError(ex);
             }
             catch (Exception ex)
             {
                 await CreateErrorResponse(ex.Message, HttpStatusCode.InternalServerError);
 
-                //Logger.WriteError(ex);
+                Logger.WriteError(ex);
             }
         }
 

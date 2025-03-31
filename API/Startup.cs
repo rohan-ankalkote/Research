@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using API.Common.Filters;
+using API.Common.MediaTypeFormatters;
 using Unity.WebApi;
 
 [assembly: OwinStartup(typeof(API.Startup))]
@@ -42,6 +43,12 @@ namespace API
                 fb.AddScopedFilter<EntitlementFilter>()));
 
             config.Filters.Add(new ExceptionFilter());
+
+            // This formatter will deserialize the incoming file content from http request.
+            // And bind that file content to the action method parameter of type IFormFile.
+            // This works only if Content-Type is multipart/form-data
+            config.Formatters.Add(new MultipartFormDataMediaTypeFormatter());
+
 
             config.MapHttpAttributeRoutes();
 
