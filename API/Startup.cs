@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
+using API.Common.Filters;
 using Unity.WebApi;
 
 [assembly: OwinStartup(typeof(API.Startup))]
@@ -36,6 +37,11 @@ namespace API
             {
                 c.EnableApiKeySupport("Authorization", "header");
             });
+
+            config.Filters.Add(new RootFilter(fb => 
+                fb.AddScopedFilter<EntitlementFilter>()));
+
+            config.Filters.Add(new ExceptionFilter());
 
             config.MapHttpAttributeRoutes();
 
